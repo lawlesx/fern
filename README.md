@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌿 Fern — Multilingual Voice Expense Tracker
 
-## Getting Started
+**Fern** is a voice-first financial assistant that turns natural spoken audio into structured expense logs in seconds. Speak your expenses in **English, Hindi, Bengali, Marathi, or code-switched dialects (Hinglish or other)**, and Fern will transcribe, translate, and categorize them automatically.
 
-First, run the development server:
+### 🚀 Tech Stack
+
+- **Framework:** Next.js (App Router) + Bun
+- **AI Model:** Google Gemini Flash via Vercel AI SDK
+- **Database:** Turso DB (libSQL)
+- **ORM:** Drizzle ORM
+- **Validation:** Zod
+- **Styling:** Tailwind CSS
+
+### ✨ Key Features
+
+- 🎙️ **Native Audio Processing:** Passes WebM audio streams directly to Gemini Flash for low-latency JSON extraction.
+- 🌐 **Multilingual Support:** Handles English, Hindi, Bengali, Marathi, Hinglish, and conversational slang effortlessly.
+- ⚡ **Edge DB:** Powered by Turso for instant, low-latency database read/writes in AWS AP South (Mumbai).
+- 🛡️ **Type-Safe Pipeline:** End-to-end type safety from Zod extraction schemas down to Drizzle database tables.
+
+## ⚙️ Prerequisites
+
+Before you begin, ensure you have the following installed on your machine:
+
+- [Bun](https://bun.sh/) (v1.0+)
+- [Turso CLI](https://docs.turso.tech/cli/installation) (Optional, but recommended for database management)
+
+---
+
+## 🔑 Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env.local` file in the root directory.
+
+```env
+# 1. Google Gemini API Key (Required for Voice-to-JSON extraction)
+# Get this from: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+GOOGLE_GENERATIVE_AI_API_KEY="your_gemini_api_key_here"
+
+# 2. Turso Database Credentials (Required for data storage)
+# Get this by running: turso db show --url <your-db-name>
+TURSO_DATABASE_URL="libsql://your-database-name-here.turso.io"
+
+# Get this by running: turso db tokens create <your-db-name>
+TURSO_AUTH_TOKEN="your_turso_auth_token_here"
+```
+
+## 🚀 Running Locally
+
+Follow these steps to get the project up and running on your local machine using Bun.
+
+1. Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+git clone [https://github.com/yourusername/fern.git](https://github.com/yourusername/fern.git)
+cd fern
+bun install
+```
+
+## 2. Set up the Database Schema:
+
+Once your .env.local file is populated with your Turso credentials, push the Drizzle schema directly to your live database.
+
+```bash
+bun db:push
+```
+
+## 3. Start the Development Server:
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will now be running at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🗄️ Database Management (Drizzle Studio)
+You can easily view, edit, and manage your live Turso data locally using Drizzle Studio.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+While your development server is running, open a new terminal tab and run:
 
-## Learn More
+```bash
+bun db:studio
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This will launch a local database UI at https://local.drizzle.studio.
