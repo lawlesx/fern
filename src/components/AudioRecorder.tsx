@@ -4,7 +4,9 @@ import useAudioRecorder from "@/hooks/useAudioRecorder";
 import { Expense } from "@/interfaces";
 import axios from "axios";
 import { useState } from "react";
+import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
+import GlassButton from "./GlassButton";
 
 const AudioRecorder = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -42,36 +44,28 @@ const AudioRecorder = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <button
+      <EtherScreen />
+      <GlassButton
         onClick={startRecording}
         disabled={isRecording}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="text-xl text-white font-mono"
       >
-        Start Recording
-      </button>
-      <button
-        onClick={pauseRecording}
-        disabled={!isRecording || isPaused}
-        className="bg-yellow-500 text-white px-4 py-2 rounded"
-      >
-        Pause Recording
-      </button>
-      <button
+        Record
+      </GlassButton>
+      <GlassButton onClick={pauseRecording} disabled={!isRecording || isPaused}>
+        Pause
+      </GlassButton>
+      <GlassButton
         onClick={resumeRecording}
         disabled={!isRecording || !isPaused}
-        className="bg-green-500 text-white px-4 py-2 rounded"
       >
-        Resume Recording
-      </button>
-      <button
-        onClick={stopRecording}
-        disabled={!isRecording}
-        className="bg-red-500 text-white px-4 py-2 rounded"
-      >
-        Stop Recording
-      </button>
+        Resume
+      </GlassButton>
+      <GlassButton onClick={stopRecording} disabled={!isRecording}>
+        Stop
+      </GlassButton>
       <p className="text-lg font-semibold">
-        Status: {isRecording ? (isPaused ? "paused" : "recording") : "idle"}
+        Status: {isRecording ? (isPaused ? "paused" : "Listening") : "idle"}
       </p>
       {recordingBlob && (
         <audio controls src={URL.createObjectURL(recordingBlob)}>
@@ -82,6 +76,7 @@ const AudioRecorder = () => {
         expenses={expenses}
         setExpenses={setExpenses}
         isExtracting={isProcessing}
+        isRecorded={!!recordingBlob}
       />
     </div>
   );

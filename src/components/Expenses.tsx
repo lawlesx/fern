@@ -6,9 +6,15 @@ interface ExpensesProps {
   expenses: Expense[];
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
   isExtracting: boolean;
+  isRecorded: boolean;
 }
 
-const Expenses = ({ expenses, setExpenses, isExtracting }: ExpensesProps) => {
+const Expenses = ({
+  expenses,
+  setExpenses,
+  isExtracting,
+  isRecorded,
+}: ExpensesProps) => {
   const [statusMessage, setStatusMessage] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -26,6 +32,15 @@ const Expenses = ({ expenses, setExpenses, isExtracting }: ExpensesProps) => {
       );
     }
   };
+
+  if (expenses.length === 0 && !isExtracting && isRecorded) {
+    return (
+      <div className="text-center text-lg text-slate-200 mt-8">
+        No expenses extracted yet. Please record an audio note to extract
+        expenses.
+      </div>
+    );
+  }
 
   return (
     <div>
