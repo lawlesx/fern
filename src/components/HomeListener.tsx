@@ -1,6 +1,5 @@
 "use client";
 
-import useAudioAnalyser from "@/hooks/useAudioAnalyser";
 import useAudioRecorder from "@/hooks/useAudioRecorder";
 import { Expense } from "@/interfaces";
 import axios from "axios";
@@ -9,7 +8,7 @@ import { useState } from "react";
 import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
-import Strands from "./Strands";
+import { StrandVisualizer } from "./StrandVisualizer";
 
 const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -44,8 +43,6 @@ const HomeListener = () => {
     },
   });
 
-  const volume = useAudioAnalyser(stream, 0.05);
-
   const pauseButton = (
     <GlassButton
       onClick={pauseRecording}
@@ -72,19 +69,13 @@ const HomeListener = () => {
     </GlassButton>
   );
 
-  const strands = (
-    <div className="overflow-hidden h-screen w-screen fixed top-0 z-0">
-      <Strands amplitude={1 + volume * 10} speed={1 + volume * 0.3} />
-    </div>
-  );
-
   return (
     <>
-      {isRecording ? strands : <EtherScreen />}
+      {isRecording ? <StrandVisualizer stream={stream} /> : <EtherScreen />}
       <div className="flex flex-col min-h-dvh items-center justify-start gap-48 z-1 py-32">
         <h1 className="text-6xl font-bold text-white font-audiowide text-center">
           {isRecording
-            ? "Umm, Listening..."
+            ? "Judging your choices..."
             : "Hi, what did you spend on today?"}
         </h1>
         {isRecording ? (
