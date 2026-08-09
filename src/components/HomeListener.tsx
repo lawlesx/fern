@@ -69,7 +69,7 @@ const HomeListener = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-dvh items-center justify-between gap-20 z-1 py-10">
+    <div className="flex flex-col min-h-dvh items-center justify-between gap-20 z-1 py-24">
       <h1 className="text-5xl font-bold text-white font-audiowide">
         Hi, what did you spend on today?
       </h1>
