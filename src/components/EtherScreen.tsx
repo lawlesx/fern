@@ -1,8 +1,9 @@
+"use client";
 import LiquidEther from "./LiquidEther";
 
 const EtherScreen = () => {
   return (
-    <div className="overflow-hidden h-screen w-screen absolute top-0">
+    <div className="overflow-hidden h-screen w-screen fixed top-0 z-0">
       <div className="w-full h-full relative">
         <LiquidEther
           colors={["#5227FF", "#FF9FFC", "#B497CF"]}

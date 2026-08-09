@@ -4,11 +4,10 @@ import useAudioRecorder from "@/hooks/useAudioRecorder";
 import { Expense } from "@/interfaces";
 import axios from "axios";
 import { useState } from "react";
-import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
 
-const AudioRecorder = () => {
+const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
@@ -43,8 +42,7 @@ const AudioRecorder = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <EtherScreen />
+    <div className="flex flex-col items-center justify-center gap-4 z-1">
       <GlassButton
         onClick={startRecording}
         disabled={isRecording}
@@ -82,4 +80,4 @@ const AudioRecorder = () => {
   );
 };
 
-export default AudioRecorder;
+export default HomeListener;
