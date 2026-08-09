@@ -1,12 +1,16 @@
 import { ButtonHTMLAttributes } from "react";
 import GlassSurface from "./GlassSurface";
 
-const GlassButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+interface GlassButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  glassSize?: number;
+}
+
+const GlassButton = ({ glassSize = 100, ...props }: GlassButtonProps) => {
   return (
     <GlassSurface
       borderRadius={100}
-      height={100}
-      width={100}
+      height={glassSize}
+      width={glassSize}
       displace={0.5}
       distortionScale={-180}
       redOffset={50}

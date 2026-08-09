@@ -3,6 +3,7 @@
 import useAudioRecorder from "@/hooks/useAudioRecorder";
 import { Expense } from "@/interfaces";
 import axios from "axios";
+import { MicIcon, PauseIcon, PlayIcon, Square } from "lucide-react";
 import { useState } from "react";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
@@ -41,41 +42,65 @@ const HomeListener = () => {
     },
   });
 
+  const pauseButton = (
+    <GlassButton
+      onClick={pauseRecording}
+      disabled={!isRecording || isPaused}
+      glassSize={50}
+    >
+      <PauseIcon fill="#f7eed5" />
+    </GlassButton>
+  );
+
+  const resumeButton = (
+    <GlassButton
+      onClick={resumeRecording}
+      disabled={!isRecording || !isPaused}
+      glassSize={50}
+    >
+      <PlayIcon fill="#f7eed5" />
+    </GlassButton>
+  );
+
+  const stopButton = (
+    <GlassButton onClick={stopRecording} disabled={!isRecording}>
+      <Square fill="#f7eed5" />
+    </GlassButton>
+  );
+
   return (
-    <div className="flex flex-col items-center justify-center gap-4 z-1">
-      <GlassButton
-        onClick={startRecording}
-        disabled={isRecording}
-        className="text-xl text-white font-mono"
-      >
-        Record
-      </GlassButton>
-      <GlassButton onClick={pauseRecording} disabled={!isRecording || isPaused}>
-        Pause
-      </GlassButton>
-      <GlassButton
-        onClick={resumeRecording}
-        disabled={!isRecording || !isPaused}
-      >
-        Resume
-      </GlassButton>
-      <GlassButton onClick={stopRecording} disabled={!isRecording}>
-        Stop
-      </GlassButton>
-      <p className="text-lg font-semibold">
-        Status: {isRecording ? (isPaused ? "paused" : "Listening") : "idle"}
-      </p>
+    <div className="flex flex-col min-h-dvh items-center justify-between gap-20 z-1 py-10">
+      <h1 className="text-5xl font-bold text-white font-audiowide">
+        Hi, what did you spend on today?
+      </h1>
+      {isRecording ? (
+        <div className="flex flex-col gap-4 items-center">
+          {stopButton}
+          {isPaused ? resumeButton : pauseButton}
+        </div>
+      ) : (
+        <GlassButton
+          onClick={startRecording}
+          disabled={isRecording}
+          className="text-xl text-white font-mono"
+        >
+          <MicIcon />
+        </GlassButton>
+      )}
+
       {recordingBlob && (
         <audio controls src={URL.createObjectURL(recordingBlob)}>
           Your browser does not support the audio element.
         </audio>
       )}
-      <Expenses
-        expenses={expenses}
-        setExpenses={setExpenses}
-        isExtracting={isProcessing}
-        isRecorded={!!recordingBlob}
-      />
+      {expenses?.length > 0 && (
+        <Expenses
+          expenses={expenses}
+          setExpenses={setExpenses}
+          isExtracting={isProcessing}
+          isRecorded={!!recordingBlob}
+        />
+      )}
     </div>
   );
 };

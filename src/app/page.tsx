@@ -3,7 +3,7 @@ import HomeListener from "@/components/HomeListener";
 
 export default function Home() {
   return (
-    <main className="flex w-full h-full flex-col items-center justify-center p-24 relative">
+    <main className="flex w-full min-h-screen flex-col items-center justify-center px-4 relative">
       <EtherScreen />
       <HomeListener />
     </main>
