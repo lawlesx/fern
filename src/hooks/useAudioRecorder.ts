@@ -8,6 +8,7 @@ const useAudioRecorder = ({ onFinish }: IUseAudioRecorder) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [recordingBlob, setRecordingBlob] = useState<Blob | null>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
   // useRef keeps these values safe between React re-renders
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -16,6 +17,8 @@ const useAudioRecorder = ({ onFinish }: IUseAudioRecorder) => {
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setStream(stream);
+
       const mediaRecorder = new MediaRecorder(stream);
 
       mediaRecorderRef.current = mediaRecorder;
@@ -71,6 +74,7 @@ const useAudioRecorder = ({ onFinish }: IUseAudioRecorder) => {
         setRecordingBlob(blob);
         setIsRecording(false);
         setIsPaused(false);
+        setStream(null);
 
         // Call the onFinish callback with the final Blob
         onFinish?.(blob);
@@ -90,6 +94,7 @@ const useAudioRecorder = ({ onFinish }: IUseAudioRecorder) => {
   }
 
   return {
+    stream,
     startRecording,
     stopRecording,
     pauseRecording,
