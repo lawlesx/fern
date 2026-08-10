@@ -13,11 +13,11 @@ import { StrandVisualizer } from "./StrandVisualizer";
 const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [isRecorded, setIsRecorded] = useState(false);
 
   const {
     startRecording,
     stopRecording,
-    recordingBlob,
     isRecording,
     isPaused,
     pauseRecording,
@@ -26,6 +26,7 @@ const HomeListener = () => {
   } = useAudioRecorder({
     onFinish: async (audioData: Blob) => {
       setIsProcessing(true);
+      setIsRecorded(true);
 
       try {
         const formData = new FormData();
@@ -69,41 +70,49 @@ const HomeListener = () => {
     </GlassButton>
   );
 
+  const getTitle = () => {
+    if (isRecording) {
+      return "Judging your choices...";
+    } else if (isProcessing) {
+      return "Calculating the damage...";
+    } else {
+      return "Hi, what did you spend on today?";
+    }
+  };
+
   return (
     <>
       {isRecording ? <StrandVisualizer stream={stream} /> : <EtherScreen />}
-      <div className="flex flex-col min-h-dvh items-center justify-start gap-48 z-1 py-32">
-        <h1 className="text-6xl font-bold text-white font-audiowide text-center">
-          {isRecording
-            ? "Judging your choices..."
-            : "Hi, what did you spend on today?"}
-        </h1>
-        {isRecording ? (
-          <div className="flex flex-col gap-4 items-center">
-            {stopButton}
-            {isPaused ? resumeButton : pauseButton}
-          </div>
-        ) : (
-          <GlassButton
-            onClick={startRecording}
-            disabled={isRecording}
-            className="text-xl text-white font-mono"
-          >
-            <MicIcon />
-          </GlassButton>
-        )}
+      <div className="flex flex-col items-center justify-start gap-48 z-1 py-32">
+        {!isRecorded ? (
+          <>
+            <h1 className="text-6xl font-bold text-white font-audiowide text-center">
+              {getTitle()}
+            </h1>
+            {isRecording ? (
+              <div className="flex flex-col gap-4 items-center">
+                {stopButton}
+                {isPaused ? resumeButton : pauseButton}
+              </div>
+            ) : (
+              <GlassButton
+                onClick={startRecording}
+                disabled={isRecording}
+                className="text-xl text-white font-mono"
+              >
+                <MicIcon />
+              </GlassButton>
+            )}
+          </>
+        ) : null}
 
-        {recordingBlob && (
-          <audio controls src={URL.createObjectURL(recordingBlob)}>
-            Your browser does not support the audio element.
-          </audio>
-        )}
-        {expenses?.length > 0 && (
+        {(isProcessing || expenses.length > 0) && (
           <Expenses
             expenses={expenses}
             setExpenses={setExpenses}
             isExtracting={isProcessing}
-            isRecorded={!!recordingBlob}
+            isRecorded={isRecorded}
+            setIsRecorded={setIsRecorded}
           />
         )}
       </div>

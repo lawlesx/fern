@@ -1,0 +1,32 @@
+import {
+  Car,
+  CreditCard,
+  Gift,
+  Heart,
+  Home,
+  LayoutGrid,
+  Monitor,
+  Music,
+  Plane,
+  ShoppingBag,
+  ShoppingCart,
+  UtensilsCrossed,
+  Zap,
+} from "lucide-react";
+
+export const categoryIconMap: Record<string, React.ReactNode> = {
+  Transportation: <Car size={14} />,
+  Groceries: <ShoppingCart size={14} />,
+  "Dining Out": <UtensilsCrossed size={14} />,
+  Snacks: <UtensilsCrossed size={14} />,
+  Utilities: <Zap size={14} />,
+  Healthcare: <Heart size={14} />,
+  Entertainment: <Music size={14} />,
+  Shopping: <ShoppingBag size={14} />,
+  Bills: <CreditCard size={14} />,
+  Rent: <Home size={14} />,
+  Subscriptions: <Monitor size={14} />,
+  Travel: <Plane size={14} />,
+  Gifts: <Gift size={14} />,
+  Other: <LayoutGrid size={14} />,
+};

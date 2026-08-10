@@ -12,7 +12,7 @@ interface StrandVisualizerProps {
 export function StrandVisualizer({ stream }: StrandVisualizerProps) {
   // This state now lives HERE.
   // Only this tiny component will re-render 60 times a second.
-  const volume = useAudioAnalyser(stream, 0.05);
+  const volume = useAudioAnalyser(stream, 0.03);
 
   return (
     <div className="overflow-hidden h-screen w-screen fixed top-0 z-0">
