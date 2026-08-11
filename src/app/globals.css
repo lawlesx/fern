@@ -136,3 +136,7 @@ body {
     @apply font-sans;
   }
 }
+
+.button {
+  @apply flex items-center justify-center gap-2 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white font-semibold text-base font-exo2 hover:bg-white/30 transition-colors;
+}
