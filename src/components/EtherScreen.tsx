@@ -14,7 +14,7 @@ const EtherScreen = () => {
           iterationsViscous={32}
           iterationsPoisson={32}
           resolution={0.5}
-          isBounce={true}
+          isBounce={false}
           autoDemo
           autoSpeed={0.5}
           autoIntensity={2.2}

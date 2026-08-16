@@ -9,6 +9,7 @@ import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
 import { StrandVisualizer } from "./StrandVisualizer";
+import { BorderBeam } from "./ui/border-beam";
 
 const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -64,6 +65,27 @@ const HomeListener = () => {
     </GlassButton>
   );
 
+  const startButton = (
+    <button
+      onClick={startRecording}
+      disabled={isRecording}
+      className="button rounded-full w-20 h-20"
+    >
+      <MicIcon />
+      <BorderBeam
+        duration={6}
+        size={80}
+        className="from-transparent via-[#FF9FFC] to-transparent"
+      />
+      <BorderBeam
+        duration={6}
+        delay={3}
+        size={90}
+        className="from-transparent via-[#5227FF] to-transparent"
+      />
+    </button>
+  );
+
   const stopButton = (
     <GlassButton onClick={stopRecording} disabled={!isRecording}>
       <Square fill="#f7eed5" />
@@ -95,13 +117,7 @@ const HomeListener = () => {
                 {isPaused ? resumeButton : pauseButton}
               </div>
             ) : (
-              <GlassButton
-                onClick={startRecording}
-                disabled={isRecording}
-                className="text-xl text-white font-mono"
-              >
-                <MicIcon />
-              </GlassButton>
+              startButton
             )}
           </>
         ) : null}
