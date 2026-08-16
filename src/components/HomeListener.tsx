@@ -1,7 +1,7 @@
 "use client";
 
 import useAudioRecorder from "@/hooks/useAudioRecorder";
-import { Expense } from "@/interfaces";
+import { ExpenseWithId } from "@/interfaces";
 import axios from "axios";
 import { MicIcon, PauseIcon, PlayIcon, Square } from "lucide-react";
 import { useState } from "react";
@@ -13,8 +13,27 @@ import { BorderBeam } from "./ui/border-beam";
 
 const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [isRecorded, setIsRecorded] = useState(false);
+  const [expenses, setExpenses] = useState<ExpenseWithId[]>([
+    {
+      id: "1",
+      amount: 20,
+      category: "Snacks",
+      description: "Chocolates",
+    },
+    {
+      id: "2",
+      amount: 50,
+      category: "Shopping",
+      description: "Pencils",
+    },
+    {
+      id: "3",
+      amount: 50,
+      category: "Transportation",
+      description: "Bus travel",
+    },
+  ]);
+  const [isRecorded, setIsRecorded] = useState(true);
 
   const {
     startRecording,
@@ -122,7 +141,7 @@ const HomeListener = () => {
           </>
         ) : null}
 
-        {(isProcessing || expenses.length > 0) && (
+        {(isRecorded || expenses.length > 0) && (
           <Expenses
             expenses={expenses}
             setExpenses={setExpenses}

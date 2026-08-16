@@ -1,12 +1,12 @@
 import { saveExpensesAction } from "@/app/action";
-import { Expense } from "@/interfaces";
-import { categoryIconMap } from "@/lib/categoryIcons";
-import { CheckCircle, LayoutGrid, Pencil, RotateCw } from "lucide-react";
+import { ExpenseWithId } from "@/interfaces";
+import { CheckCircle, RotateCw } from "lucide-react";
 import { useState } from "react";
+import ExpenseCard from "./ExpenseCard";
 
 interface ExpensesProps {
-  expenses: Expense[];
-  setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
+  expenses: ExpenseWithId[];
+  setExpenses: React.Dispatch<React.SetStateAction<ExpenseWithId[]>>;
   isExtracting: boolean;
   isRecorded: boolean;
   setIsRecorded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,27 +63,11 @@ const Expenses = ({
 
           <div className="flex flex-col gap-3">
             {expenses.map((item, index) => (
-              <div
+              <ExpenseCard
                 key={index}
-                className="p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-600 text-white text-xs font-semibold uppercase tracking-wider font-exo2">
-                    {categoryIconMap[item.category] ?? <LayoutGrid size={14} />}
-                    {item.category}
-                  </span>
-
-                  <span className="text-white text-xl font-bold font-exo2">
-                    ₹{item.amount.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex items-end justify-between mt-3">
-                  <p className="text-slate-400 text-sm font-exo2 leading-snug max-w-[80%]">
-                    {item.description}
-                  </p>
-                  <Pencil size={16} className="text-slate-500 shrink-0" />
-                </div>
-              </div>
+                expense={item}
+                setExpenses={setExpenses}
+              />
             ))}
           </div>
 
@@ -122,7 +106,7 @@ const Expenses = ({
       )}
 
       {isExtracting && (
-        <div className="flex items-center text-center gap-1 text-violet-400 font-medium font-audiowide text-3xl text-shadow-blue-300 text-shadow-sm">
+        <div className="flex items-center text-center gap-1 text-white font-medium font-audiowide text-3xl text-shadow-purple-300 text-shadow-sm">
           <span>Thinking</span>
           <span className="animate-bounce" style={{ animationDelay: "0ms" }}>
             .
@@ -140,3 +124,4 @@ const Expenses = ({
 };
 
 export default Expenses;
+
