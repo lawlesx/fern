@@ -107,7 +107,7 @@ const Expenses = ({
 
       {isExtracting && (
         <div className="flex items-center text-center gap-1 text-white font-medium font-audiowide text-3xl text-shadow-purple-300 text-shadow-sm">
-          <span>Thinking</span>
+          <span>Calculating the damage</span>
           <span className="animate-bounce" style={{ animationDelay: "0ms" }}>
             .
           </span>
@@ -124,4 +124,3 @@ const Expenses = ({
 };
 
 export default Expenses;
-

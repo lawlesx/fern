@@ -13,27 +13,8 @@ import { BorderBeam } from "./ui/border-beam";
 
 const HomeListener = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [expenses, setExpenses] = useState<ExpenseWithId[]>([
-    {
-      id: "1",
-      amount: 20,
-      category: "Snacks",
-      description: "Chocolates",
-    },
-    {
-      id: "2",
-      amount: 50,
-      category: "Shopping",
-      description: "Pencils",
-    },
-    {
-      id: "3",
-      amount: 50,
-      category: "Transportation",
-      description: "Bus travel",
-    },
-  ]);
-  const [isRecorded, setIsRecorded] = useState(true);
+  const [expenses, setExpenses] = useState<ExpenseWithId[]>([]);
+  const [isRecorded, setIsRecorded] = useState(false);
 
   const {
     startRecording,
