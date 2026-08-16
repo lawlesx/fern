@@ -1,5 +1,5 @@
+import { categoryIconMap } from "@/components/categoryIcons";
 import { Expense, ExpenseWithId } from "@/interfaces";
-import { categoryIconMap } from "@/lib/categoryIcons";
 import { expenseSchema } from "@/schema/ExpenseSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LayoutGrid, Pencil, Trash2 } from "lucide-react";

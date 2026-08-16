@@ -1,7 +1,9 @@
 import { saveExpensesAction } from "@/app/action";
 import { ExpenseWithId } from "@/interfaces";
+import { toastStyle } from "@/lib/toast";
 import { CheckCircle, RotateCw } from "lucide-react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import ExpenseCard from "./ExpenseCard";
 
 interface ExpensesProps {
@@ -23,19 +25,22 @@ const Expenses = ({
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const handleSaveExpenses = async () => {
-    try {
-      await saveExpensesAction(expenses);
+    const result = await saveExpensesAction(expenses);
+    if (result.success) {
       setExpenses([]);
       setStatusMessage("Expenses saved successfully!");
       setErrorMessage(undefined);
       setIsRecorded(false);
-    } catch (err) {
-      console.error("Failed to save expenses:", err);
-      setErrorMessage(
-        typeof err === "string"
-          ? err
-          : "Failed to save expenses to the database.",
-      );
+    } else if (
+      result.error === "Unauthorized. Please log in to save expenses."
+    ) {
+      setErrorMessage(result.error);
+      toast.error("Your session expired. Please log in again.", {
+        style: toastStyle,
+      });
+    } else {
+      setErrorMessage(result.error || "Failed to save expenses.");
+      setStatusMessage(undefined);
     }
   };
 
