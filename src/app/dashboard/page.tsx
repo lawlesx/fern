@@ -74,11 +74,22 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
 
           {categorySpends.length > 0 ? (
             <div className="space-y-6">
-              {categorySpends.map((category) => {
+              {categorySpends.map((category, index) => {
                 const percentage =
                   totalMonthSpend > 0
                     ? (category.amount / totalMonthSpend) * 100
                     : 0;
+
+                const gradients = [
+                  "from-fern-pink to-rose-400 shadow-[0_0_10px_rgba(255,42,133,0.5)]",
+                  "from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(56,189,248,0.5)]",
+                  "from-emerald-400 to-teal-500 shadow-[0_0_10px_rgba(52,211,153,0.5)]",
+                  "from-purple-500 to-fuchsia-400 shadow-[0_0_10px_rgba(192,38,211,0.5)]",
+                  "from-amber-400 to-orange-500 shadow-[0_0_10px_rgba(251,146,60,0.5)]",
+                ];
+
+                // 3. Pick a gradient based on the index so it loops smoothly if you have > 5 categories
+                const currentGradient = gradients[index % gradients.length];
 
                 return (
                   <div key={category.name} className="mb-4">
@@ -98,7 +109,7 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
 
                     <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-linear-to-r from-fern-pink to-rose-400 rounded-full animate-fill-bar shadow-[0_0_10px_rgba(255,42,133,0.5)]"
+                        className={`h-full bg-linear-to-r rounded-full animate-fill-bar ${currentGradient}`}
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>

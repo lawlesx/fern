@@ -9,7 +9,7 @@ import Hyperspeed from "./Hyperspeed";
 
 const HyperSpeedLayer = () => {
   return (
-    <div className="fixed z-0 w-full h-screen top-0">
+    <div className="fixed z-0 w-full h-screen top-0 left-0">
       <Hyperspeed
         effectOptions={{
           distortion: "turbulentDistortion",
@@ -44,12 +44,6 @@ const HyperSpeedLayer = () => {
             leftCars: [14177983, 6770850, 12732332],
             rightCars: [242627, 941733, 3294549],
             sticks: 242627,
-          },
-          onSlowDown: () => {
-            console.log("slowing down");
-          },
-          onSpeedUp: () => {
-            console.log("speeding up");
           },
         }}
       />
