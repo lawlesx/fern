@@ -58,7 +58,7 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
         </section>
 
         <section>
-          <h2 className="font-bold text-white/40 tracking-widest uppercase mb-6 font-exo2">
+          <h2 className="font-bold text-white/40 tracking-widest text-sm uppercase mb-6 font-exo2">
             Categories Breakdown
           </h2>
 
