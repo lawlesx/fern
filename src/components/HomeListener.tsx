@@ -5,6 +5,7 @@ import { ExpenseWithId } from "@/interfaces";
 import axios from "axios";
 import { MicIcon, PauseIcon, PlayIcon, Square } from "lucide-react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
@@ -39,7 +40,9 @@ const HomeListener = () => {
         });
         setExpenses(response.data.expenses);
       } catch (error) {
+        toast.error("Failed to process audio. Please try again later.");
         console.error("Failed to process audio:", error);
+        setIsRecorded(false);
       }
       setIsProcessing(false);
     },
