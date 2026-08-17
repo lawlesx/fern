@@ -10,7 +10,6 @@ import { toast } from "react-hot-toast";
 import EtherScreen from "./EtherScreen";
 import Expenses from "./Expenses";
 import GlassButton from "./GlassButton";
-import Menu from "./Menu";
 import { StrandVisualizer } from "./StrandVisualizer";
 import { BorderBeam } from "./ui/border-beam";
 
@@ -110,9 +109,6 @@ const HomeListener = () => {
   return (
     <>
       {isRecording ? <StrandVisualizer stream={stream} /> : <EtherScreen />}
-      <div className="absolute">
-        <Menu />
-      </div>
       <div className="flex flex-col items-center justify-start gap-48 z-1 py-32">
         {!isRecorded ? (
           <>
