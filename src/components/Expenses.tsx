@@ -44,11 +44,25 @@ const Expenses = ({
     }
   };
 
+  const retryExtractionButton = (
+    <button
+      className="mt-2 w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white font-semibold text-base font-exo2 hover:bg-white/30 transition-colors"
+      onClick={() => {
+        setExpenses([]);
+        setIsRecorded(false);
+      }}
+    >
+      <RotateCw size={20} />
+      Retry Extraction
+    </button>
+  );
+
   if (expenses.length === 0 && !isExtracting && isRecorded) {
     return (
       <div className="text-center text-lg text-slate-400 mt-8 font-exo2">
         No expenses extracted yet. Please record an audio note to extract
         expenses.
+        {retryExtractionButton}
       </div>
     );
   }
@@ -83,16 +97,7 @@ const Expenses = ({
             <CheckCircle size={20} />
             Save Expenses
           </button>
-          <button
-            className="mt-2 w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white font-semibold text-base font-exo2 hover:bg-white/30 transition-colors"
-            onClick={() => {
-              setExpenses([]);
-              setIsRecorded(false);
-            }}
-          >
-            <RotateCw size={20} />
-            Retry Extraction
-          </button>
+          {retryExtractionButton}
         </>
       )}
 

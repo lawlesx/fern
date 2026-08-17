@@ -4,6 +4,7 @@ import useAudioRecorder from "@/hooks/useAudioRecorder";
 import { ExpenseWithId } from "@/interfaces";
 import axios from "axios";
 import { MicIcon, PauseIcon, PlayIcon, Square } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import EtherScreen from "./EtherScreen";
@@ -124,6 +125,13 @@ const HomeListener = () => {
             )}
           </>
         ) : null}
+
+        <Link
+          href="/dashboard"
+          className="text-xs font-exo2 text-white/30 hover:text-white/70 tracking-widest uppercase transition-colors duration-300 -rotate-90 fixed -right-8 bottom-0 -translate-y-20"
+        >
+          View Dashboard
+        </Link>
 
         {(isRecorded || expenses.length > 0) && (
           <Expenses
