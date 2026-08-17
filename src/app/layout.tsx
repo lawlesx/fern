@@ -37,6 +37,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${audiowide.variable} ${exo2.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <h1 className="text-3xl text-white font-audiowide p-4 absolute">
+          FERN
+        </h1>
         {children}
         <Toaster />
       </body>

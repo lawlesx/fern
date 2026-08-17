@@ -31,30 +31,20 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
     <section>
       <div className="aurora-bg" />
       <HyperSpeedLayer />
-      <div className="relative z-10 flex-1 overflow-y-auto pb-32 px-6 pt-12 no-scrollbar">
-        <header className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-linear-to-tr from-fern-pink to-fern-yellow p-0.5">
-              <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-                <span className="text-sm font-bold font-audiowide">
-                  {session.user.name.charAt(0).toUpperCase()}
-                </span>
-              </div>
-            </div>
-            <div>
-              <p className="text-xs text-white/50 font-medium tracking-wider uppercase font-exo2">
-                Welcome back
-              </p>
-              <p className="text-sm font-semibold font-audiowide">
-                {session.user.name}
-              </p>
-            </div>
-          </div>
-
+      <div className="relative z-10 flex-1 overflow-y-auto pb-32 p-4 no-scrollbar">
+        <header className="flex items-center justify-end">
           <MonthPicker />
         </header>
 
         <section className="mb-12 flex flex-col items-center justify-center text-center">
+          <div className="flex flex-col items-center justify-center gap-1 py-8">
+            <p className="text-xs text-white/50 font-medium tracking-wider uppercase font-exo2">
+              Welcome back
+            </p>
+            <p className="text-sm font-semibold font-audiowide">
+              {session.user.name}
+            </p>
+          </div>
           <p className="text-sm text-white/60 mb-2 font-medium font-audiowide">
             Total spent this month
           </p>
