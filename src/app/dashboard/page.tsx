@@ -1,5 +1,6 @@
 import { categoryIconMap } from "@/components/categoryIcons";
 import MonthPicker from "@/components/MonthPicker";
+import RedirectToHomeButton from "@/components/RedirectToHomeButton";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -109,6 +110,7 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
             </p>
           )}
         </section>
+        <RedirectToHomeButton />
       </div>
     </section>
   );
