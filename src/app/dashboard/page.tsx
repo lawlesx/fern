@@ -3,6 +3,7 @@ import HyperSpeedLayer from "@/components/HyperSpeedLayer";
 import MonthPicker from "@/components/MonthPicker";
 import RedirectToHomeButton from "@/components/RedirectToHomeButton";
 import { auth } from "@/lib/auth";
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getDashboardData } from "../action";
@@ -10,6 +11,12 @@ import { getDashboardData } from "../action";
 interface DashboardProps {
   searchParams: Promise<{ month?: string; year?: string }>;
 }
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description:
+    "View your monthly spend, category breakdowns, and expense history.",
+};
 
 const Dashboard = async ({ searchParams }: DashboardProps) => {
   const session = await auth.api.getSession({
