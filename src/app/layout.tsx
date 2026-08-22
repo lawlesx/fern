@@ -25,7 +25,7 @@ const exo2 = Exo_2({
   weight: ["400", "500", "600", "700"],
 });
 
-// const SITE_URL = "https://yourdomain.com";
+const SITE_URL = "https://fern-five.vercel.app/";
 const CUSTOM_OG_IMAGE =
   "https://res.cloudinary.com/dk7dt0kk3/image/upload/v1787391765/Gemini_Generated_Image_23lj9x23lj9x23lj_zuknod.png";
 
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Fern | Voice-Powered Expense Tracker",
     description:
       "Track your daily spending with just your voice. Fast, private, and AI-powered.",
-    // url: SITE_URL,
+    url: SITE_URL,
     siteName: "Fern",
     locale: "en_US",
     type: "website",
