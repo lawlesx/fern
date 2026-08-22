@@ -1,5 +1,5 @@
 import { categoryIconMap } from "@/components/categoryIcons";
-import HyperSpeedLayer from "@/components/HyperSpeedLayer";
+import FloatingLinesBackground from "@/components/FloatingLinesBackground";
 import MonthPicker from "@/components/MonthPicker";
 import RedirectToHomeButton from "@/components/RedirectToHomeButton";
 import { auth } from "@/lib/auth";
@@ -37,7 +37,7 @@ const Dashboard = async ({ searchParams }: DashboardProps) => {
   return (
     <section>
       <div className="aurora-bg" />
-      <HyperSpeedLayer />
+      <FloatingLinesBackground />
       <div className="relative z-10 flex-1 overflow-y-auto pb-32 p-4 no-scrollbar">
         <header className="flex items-center justify-end">
           <MonthPicker />

@@ -3,7 +3,7 @@ import LiquidEther from "./LiquidEther";
 
 const EtherScreen = () => {
   return (
-    <div className="overflow-hidden h-screen w-screen fixed top-0 z-0">
+    <div className="overflow-hidden h-svh w-screen fixed top-0 z-0">
       <div className="w-full h-full relative">
         <LiquidEther
           colors={["#5227FF", "#FF9FFC", "#B497CF"]}
@@ -14,7 +14,7 @@ const EtherScreen = () => {
           iterationsViscous={32}
           iterationsPoisson={32}
           resolution={0.5}
-          isBounce={false}
+          isBounce={true}
           autoDemo
           autoSpeed={0.5}
           autoIntensity={2.2}
